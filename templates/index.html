@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> API para obtener Transformada de Fourier de la Demanda Eléctrica</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<h1>API para obtener Transformada de Fourier de la Demanda Eléctrica</h1>
+    <form action="/fft" method="post">
+        <label for="start_date">Fecha de inicio:</label>
+        <input type="datetime-local" id="start_date" name="start_date"  value="2018-09-02T00:00:00+02:00" >
+        <label for="end_date">Fecha de fin:</label>
+        <input type="datetime-local" id="end_date" name="end_date"  value="2018-10-06T23:59:59+02:00">
+        <button type="submit">Obtener transformada de Fourier</button>
+      </form>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

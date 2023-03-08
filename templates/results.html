@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Botones</title>
+</head>
+<body>
+    <h1>Opciones</h1>
+    <a href="{{ url_for('download_json') }}"><button id="download-json">Descargar JSON completo</button></a>
+    <a href="{{ url_for('demanda_json') }}"><button id="transform-json">Descargar JSON de transformación Fourier</button></a>
+    <a href="{{ url_for('grafico') }}"><button id="show-graph">Mostrar gráfico</button></a>
+    <a href="{{ url_for('index') }}"><button >Elegir nuevo rango de fechas</button></a>
+
+
+</body>
+</html>
