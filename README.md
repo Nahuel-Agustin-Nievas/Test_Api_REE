@@ -8,8 +8,8 @@
 
 <p>La aplicación tiene cuatro rutas:</p>
 <ul><li><code>/</code>: La página de inicio, que contiene un formulario que permite al usuario especificar el rango de fechas para el cual desea recuperar datos.</li>
-<li><code>/fft</code>: La ruta que recupera los datos de la API y los guarda en un archivo.</li>
-<li><code>/download_json</code>: La ruta que permite al usuario descargar los datos en bruto como un archivo JSON.</li>
+<li><code>/fft</code>: La ruta que recupera los datos del rango de fecha elegido de la API en bruto y los guarda en un archivo JSON.</li>
+<li><code>/download_json</code>: La ruta que permite al usuario descargar los datos con los calculos de la transformada de Fourier en un archivo JSON.</li>
 <li><code>/grafico</code>: La ruta que genera el gráfico de la FFT.</li>
 <li><code>/results</code>: La página con los botones para poder gestionar los anteriores puntos</li>
 </ul>
