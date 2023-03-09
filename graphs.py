@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import requests
 import json
 import matplotlib.pyplot as plt
@@ -7,6 +9,8 @@ import numpy as np
 from matplotlib.dates import DayLocator, DateFormatter
 from flask import send_file
 import os
+from io import BytesIO
+import base64
 
 def graphs(url):
     # Realizar la petición GET a la ruta /demanda_json y obtener los datos en formato JSON
@@ -33,12 +37,37 @@ def graphs(url):
     axs[1].plot(freq_values, transform_values)   
     axs[1].set_xlabel('Frecuencia(HZ)')    
     axs[1].set_ylabel('Transformada de Fourier') 
+
+    fig.subplots_adjust(hspace=0.5)
  
-     # Guardar el gráfico en un archivo PNG
+     # Crear el gráfico de la transformada de Fourier  
+    axs[1].plot(freq_values, transform_values)   
+    axs[1].set_xlabel('Frecuencia(HZ)')    
+    axs[1].set_ylabel('Transformada de Fourier') 
+ 
+    # Guardar el gráfico en un archivo PNG y codificarlo en base64
+     # Guardar el gráfico en un archivo PNG y codificarlo en base64
+    buffer = BytesIO()
+    fig.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_string = base64.b64encode(buffer.read()).decode('utf-8')
+
     # Cerrar la figura para liberar memoria
-    plt.show() 
     plt.close(fig)
-    
+
+    # Retornar el código HTML para mostrar la imagen y permitir su descarga
+    html = '''
+    <html>
+        <body>
+            <h1>Gráfico</h1>
+            <img src="data:image/png;base64,{}" alt="grafico_personalizado.png">
+            <br>
+            <a href="/grafico.png" download="grafico_personalizado.png">Descargar</a>
+            <button onclick="history.back()">Volver atrás</button>
+        </body>
+    </html>
+    '''.format(image_string)
+    return html
     
 
     

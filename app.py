@@ -130,8 +130,8 @@ def get_server_url():
 def grafico():
     server_url = get_server_url()
     url = f'{server_url}/demanda_json'
-    graphs(url)
-    return render_template("results.html")
+    html = graphs(url)
+    return html
 
 @app.route('/results')
 def results():
