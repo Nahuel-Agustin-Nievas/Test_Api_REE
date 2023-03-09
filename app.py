@@ -9,10 +9,13 @@ import matplotlib.dates as mdates
 from datetime import datetime
 import os
 from graphs import graphs
+import socket
 
 app = Flask(__name__) 
 app.secret_key = '94318075c5'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'files')
+
+server_url = os.environ.get('SERVER_URL')
 
 @app.route('/fft', methods=['GET', 'POST'])
 def fft_endpoint():
@@ -110,9 +113,23 @@ def demanda_json():
 def index():
         return render_template("index.html")
 
+
+def get_server_url():
+    # Obtener la URL del servidor desde la variable de entorno 'SERVER_URL'
+    server_url = os.getenv('SERVER_URL')
+
+    # Si no se ha establecido una variable de entorno, usar una URL predeterminada
+    if not server_url:
+        server_url = 'http://localhost:5000'
+
+    return server_url
+
+
+
 @app.route('/grafico', methods=['GET', 'POST'])
 def grafico():
-    url = 'http://localhost:8001/demanda_json'
+    server_url = get_server_url()
+    url = f'{server_url}/demanda_json'
     graphs(url)
     return render_template("results.html")
 
@@ -125,7 +142,6 @@ def results():
 def download_json():
     # Ruta al archivo data.json
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'data.json')
-    
     # Enviar el archivo como respuesta HTTP
     return send_file(file_path, as_attachment=True)
 
