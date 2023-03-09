@@ -5,6 +5,8 @@ from datetime import datetime
 import matplotlib.dates as mdates
 import numpy as np
 from matplotlib.dates import DayLocator, DateFormatter
+from flask import send_file
+import os
 
 def graphs(url):
     # Realizar la petición GET a la ruta /demanda_json y obtener los datos en formato JSON
@@ -31,6 +33,12 @@ def graphs(url):
     axs[1].plot(freq_values, transform_values)   
     axs[1].set_xlabel('Frecuencia(HZ)')    
     axs[1].set_ylabel('Transformada de Fourier') 
-
-    # Mostrar los gráficos 
+ 
+     # Guardar el gráfico en un archivo PNG
+    # Cerrar la figura para liberar memoria
     plt.show() 
+    plt.close(fig)
+    
+    
+
+    
