@@ -2,14 +2,9 @@ import requests
 import json
 import pandas as pd
 import numpy as np
-from scipy.fft import fft
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory, jsonify, send_file, session
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from datetime import datetime
+from flask import Flask, render_template, request, jsonify, send_file
 import os
 from graphs import graphs
-import socket
 
 app = Flask(__name__) 
 app.secret_key = '94318075c5'
@@ -41,7 +36,6 @@ def fft_endpoint():
     # Si la respuesta HTTP fue exitosa (código 200), almacena la variable data en una variable de sesión
     if response.status_code == 200:
         data = response.json()
-        session['data'] = data
         # Guardar la data en un archivo en el servidor
         filename = 'data.json'
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename) # app.config['UPLOAD_FOLDER'] debe ser la ruta a la carpeta en el servidor donde deseas guardar el archivo
