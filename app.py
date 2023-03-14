@@ -19,7 +19,7 @@ server_url = os.environ.get('SERVER_URL')
 
 @app.route('/fft', methods=['GET', 'POST'])
 def fft_endpoint():
-    token = 'f9cc0ba317d94318075c597df818c413def16b7046acb73099f59b728fa2ab7e'
+    token = os.environ.get('TOKEN')
     variable_id = '1293'
     url = 'https://api.esios.ree.es/indicators/1293'
     # Define los encabezados de la solicitud
