@@ -98,15 +98,11 @@ def demanda_json():
             }
             data.append(item)
         
-        # Agregamos los datos de la transformada de Fourier al diccionario
+         # Agregamos los datos de la transformada de Fourier al diccionario
         demanda_json = {'data': data, 'frecuencias': xf.tolist(), 'transformada': (2.0/int(n) * np.abs(yf[0:int(n)//2])).tolist()}
         
-        # Escribimos el diccionario en un archivo JSON
-        with open('demanda_transformada.json', 'w') as f:
-            json.dump(demanda_json, f)
-    
-    # Enviamos el archivo JSON como respuesta HTTP
-        return send_file('demanda_transformada.json', as_attachment=True)
+    # Retornamos los datos en formato JSON
+        return jsonify(demanda_json)
         
 
 @app.route('/')

@@ -45,7 +45,6 @@ def graphs(url):
     axs[1].set_xlabel('Frecuencia(HZ)')    
     axs[1].set_ylabel('Transformada de Fourier') 
  
-    # Guardar el gráfico en un archivo PNG y codificarlo en base64
      # Guardar el gráfico en un archivo PNG y codificarlo en base64
     buffer = BytesIO()
     fig.savefig(buffer, format='png')
